@@ -1,0 +1,53 @@
+import pygame
+
+# Initialize Pygame
+pygame.init()
+
+# Define resolutions
+windowed_resolution = (1920, 1080)  # Full HD in windowed mode
+fullscreen_resolution = (0, 0)  # Use current screen resolution for fullscreen
+
+# Create a display surface in windowed mode
+screen = pygame.display.set_mode(windowed_resolution)
+
+# To switch to fullscreen, you can use
+# screen = pygame.display.set_mode(fullscreen_resolution, pygame.FULLSCREEN)
+
+# To toggle fullscreen within the game, you might use:
+def toggle_fullscreen():
+    if screen.get_flags() & pygame.FULLSCREEN:
+        pygame.display.set_mode(windowed_resolution)  # Switch to windowed
+    else:
+        pygame.display.set_mode(fullscreen_resolution, pygame.FULLSCREEN)  # Switch to fullscreen
+
+# Game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_f:  # Press 'F' key to toggle fullscreen
+                toggle_fullscreen()
+
+    # Update the display
+    pygame.display.flip()
+
+# Quit Pygame
+pygame.quit()
+
+
+???????????????????????????????
+
+class GameLogic:
+    def __init__(self):
+        # Define general attributes and mechanics here
+        pass
+
+    def lightning_damage(self, level):
+        # Define general logic for lightning damage
+        # 'level' could be 'weak', 'medium', or 'high'
+        base_damage = {"weak": 10, "medium": 20, "high": 30}
+        return base_damage.get(level, 0)
+    
+    # Additional methods for other types of damage, defense, etc.

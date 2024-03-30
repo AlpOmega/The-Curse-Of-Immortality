@@ -1,0 +1,25 @@
+USER STORY
+
+As a player, I anticipate navigating a meticulously organized main menu featuring the game's title, an option to select "Normal Mode," and a locked "Insane Mode" accessible through a cheat code. The menu should also offer the ability to load the most recent saved game, deleted upon dying and provide succinct descriptions of each game mode, with langage choice box between enlgish and arabic
+
+Upon initiating the game, I look forward to engaging dialogues with the convenience of a "Skip" button for those eager to proceed directly to the gameplay.
+
+As the battle commences, I expect an animated introduction that prominently displays the boss's name, setting the tone for the ensuing conflict. The combat interface should offer four strategic choices: Attack, Defense, Item, and Power Attack.
+
+Attack: A conventional physical attack with a probability of afflicting the boss with a "bleeding" condition.
+Defense: Activation of defense should mitigate 40% of incoming damage, an essential tactic against the boss's potent attacks.
+Item: Availability of three categories of buff items to enhance attack, defense, and evasion capabilities, alongside analogous debuff items to impair the boss. The inventory should also include five bottles each for stamina and health replenishment.
+Power Attack: An assortment of elemental attacks including weak fire, weak and medium lightning, high-power lightning, medium wind, and weak water attacks, complemented by options for medium healing and enhanced defense.
+The expenditure of actions should scale with their potency, consuming one stamina point for low-intensity actions, two for medium, and three for high-intensity actions. In Normal Mode, standard attacks should replenish one stamina point, whereas in Phase 2 of Insane Mode, they should restore 1.5 stamina points. Defense maneuvers, by default, do not restore stamina except in Insane Mode, where they regenerate one stamina point.
+
+effects do not stack, only two at a time, then boss would have a reduction of the reaction for 2 turns
+
+Elemental and bleeding effects should introduce strategic depth, influencing the boss's vulnerabilities and resistances. For instance, combining wind and fire could trigger a "flame" status, inflicting damage over time, while pairing fire with water or lightning could result in "vaporize," reducing the boss's defense and increasing susceptibility to physical attacks. The boss, in turn, can impose similar effects on the player, albeit at half the potency.
+
+Fight durations are designed to span at least four minutes in Normal Mode and six minutes in Insane Mode, with the latter's Phase 2 concluding within approximately two minutes.
+
+The game should facilitate cheat activation through specific codes or by completing the game without cheats. Saving progress must be straightforward, enabled by pressing the 'S' key, with clear on-screen indications for saving and skipping through cutscenes or dialogues.
+
+A comprehensive guide within the main menu will assist players in familiarizing themselves with game mechanics and strategies. 
+
+To ensure a seamless and intuitive gaming experience, the game will support both keyboard (using WASD for navigation and spacebar for selection) and mouse (left-click for selection) controls.

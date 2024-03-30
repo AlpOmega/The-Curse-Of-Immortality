@@ -1,0 +1,25 @@
+finish working on json files, first start with sounds
+
+2024-3-4:
+    finished working on the game structure, now I should start with making everything done in json files so that my organization is the best
+
+2024-3-5:
+    some code, I stopped because of fear i guess? anyway, I have to make a new way of making classes, I will clean some assets too
+
+2024-3-11:
+    add some functionality, tested images, now I want to add button that would make you start with the game Speech, then the game Logic
+
+2024-3-16:
+    played and expremented with pictures, although it throws error at me like: TypeError: 'NoneType' object is not callable
+
+2024-3-17:
+    the problem was the naming, it replaced every draw() method in the paragrah which led to it assginng draw method to none, simply changed draw to show, and changed MainMenu to super so that it inhreates everthing from the game correctly
+    
+2024-3-18:
+    Okay, so about that, I need to add functionality that is dynamic and static, understand that from gpt and Implement functionality
+
+2024-3-19:
+    not much... well I won't get any better at this situation, anyways: is_clicked does see if it's clicked in the desired pos or not, use it to Implement a button
+
+2024-3-20:
+    Implement an avatar, when I tried to make a placeholder for my player, I made captian class that would contain the player attribute

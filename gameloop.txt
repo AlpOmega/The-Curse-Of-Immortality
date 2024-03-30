@@ -1,0 +1,173 @@
+Game Files:
+Main Game File and Gameplay Core File: Two primary files to manage the game; one for starting the game and another dedicated to gameplay mechanics.
+Save File (JSON): A JSON file to save and load game progress.
+Dialogues (Arabic and English in JSON): JSON files for storing game dialogues in both Arabic and English.
+Sounds and Music (JSON): JSON files to organize and reference all sound effects and music tracks.
+Sprites and Other Images (JSON): JSON files for managing all visual assets like sprites and images.
+
+    don't forget: make the game create a save file
+
+
+main.py:
+    This file should act as the entry point of your game, primarily responsible for initializing the game, managing top-level game states, and coordinating the high-level flow of the game.
+
+    Classes and Responsibilities in main.py:
+
+    GameplayManager(): This class is the heart of your game control system. It should initialize the game environment, manage transitions between different game states (like starting, ending, pausing the game), and delegate gameplay-specific tasks to the Play class from gameplay.py.
+        init(self, game_state)
+        def pause, start, lose, win, resume, cutscene
+
+    Menu(): Handles the main menu and sub-menus like the pause menu, settings, and language selection. This includes starting the game, loading/saving game states, adjusting settings, and quitting the game.
+        init(self, setting, language)
+        def save, load, delete, ext
+
+    Speech(): Manages the narrative elements, controlling how the story unfolds, dialogue display, and language settings.
+        init(self, dialog, language)
+
+    Sound(): Manages background music and sound effects, including playing, pausing, and stopping sounds based on game events and user interactions.
+        init(self, music, effect)
+        def high, medium, low, off
+        
+        
+
+gameplay.py:
+    This module should encapsulate the detailed mechanics of your game, focusing on player actions, combat, and interactions within the game world.
+
+    Classes and Responsibilities in gameplay.py:
+
+    Play(): Acts as a manager for in-game activities, controlling the gameplay loop, and updating the game state based on player input and game rules. It interacts with CombatSystem, Captain, and Hunter to manage combat and player/enemy states.
+        init(self)
+    
+    CombatSystem(play): Dedicated to handling all combat-related mechanics, including attacks, defense, item usage, and special powers. It defines how entities interact in combat, the effects of different actions, and the resolution of combat encounters.
+        init(self, reaction, health, defense, element, buff, debuff)
+        def health_bar, stamina_bar, vaporize, flame, soffucate, overload, dizziness, Conductor, lightning, water, wind, fire, attack_stat, defense_stat, evasion_stat
+
+    Captain(CombatSystem): Represents the player character, detailing their abilities, stats (like health and stamina), and specific rules for how they engage in combat and are affected by different game states (e.g., normal vs. insane mode).
+        inherits, all states in CombatSystem
+        init(self, health, stamina, attack_stat, defense_stat, evasion_stat)
+        def health, stamina, attack, defense, evasion
+
+    Hunter(CombatSystem): Represents the boss or enemies, defining their combat behaviors, special abilities, and how they respond to the player's actions. It includes rules for the boss's phases and how its combat strategy changes.
+        inherits, all states in CombatSystem
+        init(self, health, attack)
+        def health, attack, defense, evasion, reaction_cap, phase2
+
+    Integration Between main.py and gameplay.py:
+    GameplayManager in main.py should create an instance of the Play class from gameplay.py to manage the core gameplay loop.
+    Menu class might interact with Play to pause/resume the game or to apply/load game settings.
+    Speech and Sound might be used within gameplay.py to trigger narrative progression or sound effects based on gameplay events.
+    General Flow:
+    The player starts the game via main.py, which initializes the game environment and displays the main menu.
+    Upon starting a new game or loading a saved game, GameplayManager initializes Play from gameplay.py, entering the main gameplay loop.
+    During gameplay, player actions and game events are managed by Play and CombatSystem, with Captain and Hunter representing the player and enemy states.
+    The player can access in-game menus to save progress, adjust settings, or pause the game, handled by the Menu class in main.py.
+    Narrative elements are presented at appropriate times via the Speech class, enhancing the game's story.
+    Sound effects and music are managed by the Sound class, adding to the game's atmosphere and providing audio feedback for player actions.
+
+    note:
+        make functions with in the classes to contain the development
+        use dump load not s version
+        maybe it's easier to declare varible for how many moves left
+
+
+
+
+
+
+
+
+
+
+
+
+
+            GameplayManager(): The main class responsible for overseeing the entire game's operation.
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    Play(): This class manages all essential gameplay elements.
+
+    CombatSystem(): Handles combat mechanics, including:
+
+    Normal Attack: A basic physical attack with a 10% chance to cause bleeding, replenishing the player's stamina.
+    Defense: Reduces incoming damage by 40%.
+    Items: Various items for healing, stamina regeneration, defense enhancement, attack boost, and evasion improvement. Includes items to reduce the boss's damage, defense, and evasion.
+    Power Logic: Special elemental attacks with specific effects:
+    Wind and Fire: Creates a "flame" effect, causing ongoing damage over time.
+    Fire and Water: "Vaporize" effect, reducing the boss's defense and increasing physical attack damage.
+    Water and Lightning: "Conductor" effect, enhancing physical damage and potentially stunning the boss.
+    Lightning and Wind: Causes "dizziness," stunning the boss and reducing their evasion to 0% for a few turns.
+    Water and Wind: "Suffocate" effect, lowering evasion and reducing damage dealt by the entity.
+    Captain(): Inherits from CombatSystem with specific rules:
+
+    Features a health and stamina bar. In normal mode, stamina regenerates as follows:
+    Normal attacks regenerate 1 stamina point.
+    Weak elemental attacks (wind, fire, lightning, water) consume 1 stamina.
+    Medium attacks (fire, lightning, wind) consume 2 stamina.
+    High-powered attacks and buffs (lightning, damage boost, defense boost) consume 3 stamina.
+    The stamina bar has a maximum of 12 points.
+    A player can be affected by up to 2 effects simultaneously.
+    In Insane Mode:
+
+    The player gets 2 moves.
+    Attacks regenerate 1.5 stamina.
+    Defense actions regenerate 1 stamina point in phase 2.
+    No limit on the number of simultaneous effects on the player.
+    Hunter(): Inherits from CombatSystem and Captain, specific to the boss with the following conditions:
+
+    The boss doesn't have a stamina bar and can perform any attack at will.
+    Limited to 3 simultaneous reaction effects in all modes.
+    In Insane Mode:
+
+    The boss receives double damage and defense, with a 1.2 evasion rate.
+    In Phase 2:
+
+    The boss's damage triples, defense reduces to 0.7, evasion rate is normal, and it gets 3 turns.
+    The limit on reaction effects is removed.
+    Menu(): Manages the game's menu screens, including cheat code entry, mode selection, save/load functions (note: save both the player and the enemy status, erase data once losing so player won't cheat), pause menu, language selection, and settings for music/sound effects.
+
+    Speech(): Manages the game's narrative, including story progression and language settings.
+
+    Sound(): Handles all audio aspects, including sound effects and music.
+
+
+
+
+BUTTONS TASKS !!!!!!!!!!!!!!!!!:
+
+For Dynamic Buttons (Approach 1):
+
+Identify Dynamic Buttons:
+
+List out which buttons in your game perform actions that might change based on the game's state (e.g., Start, Load, Save).
+Implement Click Detection:
+
+{{{{like "Action" buttons (Start, Load, Save, Resume, Pause).}}}}, [[[[[[[[static would be every system button,(Language, Sound) or exiting the game. A "Try Again", Insane Mode]]]]]]]]
+
+In your game loop or event handling section, detect mouse click events. Use Pygame's event system to check for MOUSEBUTTONDOWN events.
+Check Button Collision:
+
+For each dynamic button, use the is_clicked method to check if the mouse click position collides with the button's rectangle. You'll need to get the mouse position from the event and pass it to is_clicked.
+Define Actions Elsewhere:
+
+Based on which button was clicked, trigger the appropriate action. This might involve changing the game state, loading a game, or any other significant action. These actions should be defined outside the Button class, possibly in your main game loop or a dedicated method for handling state changes.
+For Static Buttons (Approach 2):
+Identify Static Buttons:
+
+Determine which buttons will have a fixed action regardless of the game's state (e.g., Quit, Sound toggle).
+Enhance Button Class (Optional):
+
+Consider adding an optional parameter or method to your Button class that allows you to specify the action (as a function or lambda) to be taken when the button is clicked. This step is optional and based on your preference for keeping button actions within the Button class.
+Implement Action Execution:
+
+Directly within the Button class or through a method called by is_clicked, execute the predefined action if a static button is clicked. This could be as simple as quitting the game or toggling a setting.
+Integrate Static Button Actions:
+
+In your event loop, after detecting a click on a static button, allow the button itself to handle executing its action. This may involve simply checking for a click and then calling the action directly if detected.
+General Steps:
+Review your game's structure to find the best place for detecting clicks and handling actions. This could be within a main game loop or specific state classes.
+Test each button individually to ensure its click detection and action execution work as expected.
+Consider how your game's architecture supports adding new buttons in the future, aiming for a balance between flexibility and simplicity.

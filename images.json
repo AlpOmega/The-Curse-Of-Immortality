@@ -1,0 +1,31 @@
+{
+    "background":[
+        {
+            "id": "play_background",
+            "path": "./the-curse-of-immortality/sprites/background.jpeg"
+        }
+    ],
+
+    "menu":[
+        {"id": "button",
+        "path":"./the-curse-of-immortality/sprites/menu.webp"}
+    ],
+
+    "captain":[
+        {
+        "id": "captain_avatar",
+        "path": "./the-curse-of-immortality/sprites/character/captain/captain-avatar.jpg"
+        },
+        {
+        "id": "captain_sprite",
+        "path": "./the-curse-of-immortality/sprites/character/captain/captain-sheet.webp"
+        }
+    ],
+
+    "hunter":[
+        {"id": "godwin_sprite",
+        "path": "./the-curse-of-immortality/sprites/character/hunter/hunter.webp"
+    }
+    ]
+}
+
